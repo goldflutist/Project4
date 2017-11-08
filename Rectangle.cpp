@@ -12,7 +12,7 @@
 
 #include "Rectangle.h"
 #include "Line.h"
-#include "Rectangle.h"
+#include "Triangle.h"
 #include "Graphics.h"
 #include <algorithm>
 using namespace std;
@@ -34,7 +34,7 @@ Rectangle::Rectangle(Point pt1, Point pt2, Color color) {
 }
 
 Rectangle::Rectangle(Point pt1, Point pt2, Color cTopLeft, Color cTopRight,
-              Color cBottomRight, Color cBottomLeft) {
+                     Color cBottomRight, Color cBottomLeft) {
     start = pt1;
     end = pt2;
     colorTopLeft = cTopLeft;
@@ -127,7 +127,7 @@ void Rectangle::draw(Graphics & drawer)
     Point topRight(end.getX(), start.getY());
     Point bottomRight = end;
     Point bottomLeft(start.getX(), end.getY());
-
+    
     // center point and color by averaging
     Point center((start.getX() + end.getX()) / 2,
                  (start.getY() + end.getY()) / 2);
@@ -140,15 +140,15 @@ void Rectangle::draw(Graphics & drawer)
                       (colorTopLeft.getBlue() + colorTopRight.getBlue() +
                        colorBottomRight.getBlue() +
                        colorBottomLeft.getBlue()) / 4);
-
-    // four Rectangles to represent rectangle
-    Rectangle top(topLeft, colorTopLeft, topRight, colorTopRight,
+    
+    // four triangles to represent rectangle
+    Triangle top(topLeft, colorTopLeft, topRight, colorTopRight,
                  center, colorCenter);
-    Rectangle bottom(bottomLeft, colorBottomLeft, bottomRight, colorBottomRight,
+    Triangle bottom(bottomLeft, colorBottomLeft, bottomRight, colorBottomRight,
                     center, colorCenter);
-    Rectangle left(topLeft, colorTopLeft, bottomLeft, colorBottomLeft,
+    Triangle left(topLeft, colorTopLeft, bottomLeft, colorBottomLeft,
                   center, colorCenter);
-    Rectangle right(topRight, colorTopRight, bottomRight, colorBottomRight,
+    Triangle right(topRight, colorTopRight, bottomRight, colorBottomRight,
                    center, colorCenter);
     top.draw(drawer);
     bottom.draw(drawer);
