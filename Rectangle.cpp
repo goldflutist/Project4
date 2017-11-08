@@ -12,7 +12,7 @@
 
 #include "Rectangle.h"
 #include "Line.h"
-#include "Triangle.h"
+#include "Rectangle.h"
 #include "Graphics.h"
 #include <algorithm>
 using namespace std;
@@ -22,7 +22,88 @@ using namespace std;
 //       getColorTopRight, setColorBottomRight, getColorBottomRight,
 //       setColorBottomLeft, getColorBottomLeft, read, write.
 
+Rectangle::Rectangle(){}
 
+Rectangle::Rectangle(Point pt1, Point pt2, Color color) {
+    start = pt1;
+    end = pt2;
+    colorTopLeft = color;
+    colorTopRight = color;
+    colorBottomLeft = color;
+    colorBottomRight = color;
+}
+
+Rectangle::Rectangle(Point pt1, Point pt2, Color cTopLeft, Color cTopRight,
+              Color cBottomRight, Color cBottomLeft) {
+    start = pt1;
+    end = pt2;
+    colorTopLeft = cTopLeft;
+    colorTopRight = cTopRight;
+    colorBottomLeft = cBottomLeft;
+    colorBottomRight = cBottomRight;
+}
+
+void Rectangle::setStart(Point pt) {
+    start = pt;
+}
+
+Point Rectangle::getStart() {
+    return start;
+}
+
+void Rectangle::setEnd(Point pt) {
+    end = pt;
+}
+
+Point Rectangle::getEnd() {
+    return end;
+}
+
+
+void Rectangle::setColor(Color color) {
+    colorTopLeft = color;
+    colorTopRight = color;
+    colorBottomLeft = color;
+    colorBottomRight = color;
+}
+
+void Rectangle::setColorTopLeft(Color color) {
+    colorTopLeft = color;
+}
+
+Color Rectangle::getColorTopLeft() {
+    return colorTopLeft;
+}
+
+void Rectangle::setColorTopRight(Color color) {
+    colorTopRight = color;
+}
+
+Color Rectangle::getColorTopRight() {
+    return colorTopRight;
+}
+
+void Rectangle::setColorBottomLeft(Color color) {
+    colorBottomLeft = color;
+}
+
+Color Rectangle::getColorBottomLeft() {
+    return colorBottomLeft;
+}
+
+void Rectangle::setColorBottomRight(Color color) {
+    colorBottomRight = color;
+}
+
+Color Rectangle::getColorBottomRight() {
+    return colorBottomRight;
+}
+
+void Rectangle::read(istream& ins) {
+}
+
+void Rectangle::write(ostream& outs) {
+}
 
 // Your code goes above this line.
 // Don't change the implementations below!
@@ -60,14 +141,14 @@ void Rectangle::draw(Graphics & drawer)
                        colorBottomRight.getBlue() +
                        colorBottomLeft.getBlue()) / 4);
 
-    // four triangles to represent rectangle
-    Triangle top(topLeft, colorTopLeft, topRight, colorTopRight,
+    // four Rectangles to represent rectangle
+    Rectangle top(topLeft, colorTopLeft, topRight, colorTopRight,
                  center, colorCenter);
-    Triangle bottom(bottomLeft, colorBottomLeft, bottomRight, colorBottomRight,
+    Rectangle bottom(bottomLeft, colorBottomLeft, bottomRight, colorBottomRight,
                     center, colorCenter);
-    Triangle left(topLeft, colorTopLeft, bottomLeft, colorBottomLeft,
+    Rectangle left(topLeft, colorTopLeft, bottomLeft, colorBottomLeft,
                   center, colorCenter);
-    Triangle right(topRight, colorTopRight, bottomRight, colorBottomRight,
+    Rectangle right(topRight, colorTopRight, bottomRight, colorBottomRight,
                    center, colorCenter);
     top.draw(drawer);
     bottom.draw(drawer);

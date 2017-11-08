@@ -40,9 +40,9 @@ void Graphics::clear(){
 }
 
 void Graphics::setPixel(int x, int y, Color color){
-    pixelData[x][y].setRed(color.getRed());
-    pixelData[x][y].setGreen(color.getGreen());
-    pixelData[x][y].setBlue(color.getBlue());
+    pixelData[y][x].setRed(color.getRed());
+    pixelData[y][x].setGreen(color.getGreen());
+    pixelData[y][x].setBlue(color.getBlue());
     
     return;
 }

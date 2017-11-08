@@ -23,6 +23,52 @@ using namespace std;
 Circle::Circle() {
 }
 
+Circle::Circle(Point pt, int r, Color c) {
+    center = pt;
+    radius = checkRadius(r);
+    color = c;
+
+}
+
+void Circle::setCenter(Point pt) {
+    center = pt;
+}
+
+Point Circle::getCenter() {
+    return center;
+}
+
+void Circle::setRadius(int r) {
+    radius = checkRadius(r);
+}
+
+int Circle::getRadius() {
+    return radius;
+}
+
+void Circle::setColor(Color c) {
+    color = c;
+}
+
+Color Circle::getColor() {
+    return color;
+}
+
+void Circle::read(istream& ins) {
+    Point newCenter;
+    int newRadius;
+    Color newColor;
+
+    ins >> newCenter >> newRadius >> newColor;
+
+    setCenter(newCenter);
+    setRadius(newRadius);
+    setColor(newColor);
+}
+
+void Circle::write(ostream& outs) {
+    outs << center << " " << radius << " " << color;
+}
 
 // Your code goes above this line.
 // Don't change the implementations below!
