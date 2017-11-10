@@ -23,6 +23,127 @@ using namespace std;
 //       read, write.
 
 
+Triangle::Triangle() {
+}
+
+Triangle::Triangle(Point pt1, Point pt2, Point pt3, Color color) {
+    vertexOne = pt1;
+    vertexTwo = pt2;
+    vertexThree = pt3;
+    vertexOneColor = color;
+    vertexTwoColor = color;
+    vertexThreeColor = color;
+}
+
+Triangle::Triangle(Point pt1, Color color1,
+                   Point pt2, Color color2,
+                   Point pt3, Color color3) {
+    vertexOne = pt1;
+    vertexTwo = pt2;
+    vertexThree = pt3;
+    vertexOneColor = color1;
+    vertexTwoColor = color2;
+    vertexThreeColor = color3;
+}
+
+void Triangle::setColor(Color color) {
+    vertexOneColor.setRed(color.getRed());
+    vertexOneColor.setGreen(color.getGreen());
+    vertexOneColor.setBlue(color.getBlue());
+    vertexTwoColor.setRed(color.getRed());
+    vertexTwoColor.setGreen(color.getGreen());
+    vertexTwoColor.setBlue(color.getBlue());
+    vertexThreeColor.setRed(color.getRed());
+    vertexThreeColor.setGreen(color.getGreen());
+    vertexThreeColor.setBlue(color.getBlue());
+}
+
+void Triangle::setVertexOne(Point pt) {
+    vertexOne = pt;
+}
+
+Point Triangle::getVertexOne() {
+    return vertexOne;
+}
+
+void Triangle::setVertexOneColor(Color color) {
+    vertexOneColor.setRed(color.getRed());
+    vertexOneColor.setGreen(color.getGreen());
+    vertexOneColor.setBlue(color.getBlue());
+}
+
+Color Triangle::getVertexOneColor() {
+    return vertexOneColor;
+}
+
+void Triangle::setVertexTwo(Point pt) {
+    vertexTwo = pt;
+}
+
+Point Triangle::getVertexTwo() {
+    return vertexTwo;
+}
+
+void Triangle::setVertexTwoColor(Color color) {
+    vertexTwoColor.setRed(color.getRed());
+    vertexTwoColor.setGreen(color.getGreen());
+    vertexTwoColor.setBlue(color.getBlue());
+}
+
+Color Triangle::getVertexTwoColor() {
+    return vertexTwoColor;
+}
+
+
+void Triangle::setVertexThree(Point pt) {
+    vertexThree = pt;
+}
+
+Point Triangle::getVertexThree() {
+    return vertexThree;
+}
+
+void Triangle::setVertexThreeColor(Color color) {
+    vertexThreeColor.setRed(color.getRed());
+    vertexThreeColor.setGreen(color.getGreen());
+    vertexThreeColor.setBlue(color.getBlue());
+}
+
+Color Triangle::getVertexThreeColor() {
+    return vertexThreeColor;
+}
+
+void Triangle::read(istream& ins) {
+    Point newV1;
+    Point newV2;
+    Point newV3;
+    Color newC;
+    Color newC1;
+    Color newC2;
+    Color newC3;
+    ins >> newV1 >> newV2 >> newV3 >> newC;
+    if (ins.fail()) {
+        ins.clear();
+        ins >> newV1 >> newC1 >> newV2 >> newC2 >> newV3 >> newC3;
+        setVertexOne(newV1);
+        setVertexTwo(newV2);
+        setVertexThree(newV3);
+        setVertexOneColor(newC1);
+        setVertexTwoColor(newC2);
+        setVertexThreeColor(newC3);
+    } else {
+        setVertexOne(newV1);
+        setVertexTwo(newV2);
+        setVertexThree(newV3);
+        setColor(newC);
+    }
+}
+
+void Triangle::write(ostream& outs) {
+    outs << getVertexOne() << " " << getVertexOneColor() << " "
+         << getVertexTwo() << " " << getVertexTwoColor() << " "
+         << getVertexThree() << " " << getVertexThreeColor();
+}
 
 // Your code goes above this line.
 // Don't change the implementations below!

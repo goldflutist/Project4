@@ -22,7 +22,88 @@ using namespace std;
 //       getColorTopRight, setColorBottomRight, getColorBottomRight,
 //       setColorBottomLeft, getColorBottomLeft, read, write.
 
+Rectangle::Rectangle(){}
 
+Rectangle::Rectangle(Point pt1, Point pt2, Color color) {
+    start = pt1;
+    end = pt2;
+    colorTopLeft = color;
+    colorTopRight = color;
+    colorBottomLeft = color;
+    colorBottomRight = color;
+}
+
+Rectangle::Rectangle(Point pt1, Point pt2, Color cTopLeft, Color cTopRight,
+                     Color cBottomRight, Color cBottomLeft) {
+    start = pt1;
+    end = pt2;
+    colorTopLeft = cTopLeft;
+    colorTopRight = cTopRight;
+    colorBottomLeft = cBottomLeft;
+    colorBottomRight = cBottomRight;
+}
+
+void Rectangle::setStart(Point pt) {
+    start = pt;
+}
+
+Point Rectangle::getStart() {
+    return start;
+}
+
+void Rectangle::setEnd(Point pt) {
+    end = pt;
+}
+
+Point Rectangle::getEnd() {
+    return end;
+}
+
+
+void Rectangle::setColor(Color color) {
+    colorTopLeft = color;
+    colorTopRight = color;
+    colorBottomLeft = color;
+    colorBottomRight = color;
+}
+
+void Rectangle::setColorTopLeft(Color color) {
+    colorTopLeft = color;
+}
+
+Color Rectangle::getColorTopLeft() {
+    return colorTopLeft;
+}
+
+void Rectangle::setColorTopRight(Color color) {
+    colorTopRight = color;
+}
+
+Color Rectangle::getColorTopRight() {
+    return colorTopRight;
+}
+
+void Rectangle::setColorBottomLeft(Color color) {
+    colorBottomLeft = color;
+}
+
+Color Rectangle::getColorBottomLeft() {
+    return colorBottomLeft;
+}
+
+void Rectangle::setColorBottomRight(Color color) {
+    colorBottomRight = color;
+}
+
+Color Rectangle::getColorBottomRight() {
+    return colorBottomRight;
+}
+
+void Rectangle::read(istream& ins) {
+}
+
+void Rectangle::write(ostream& outs) {
+}
 
 // Your code goes above this line.
 // Don't change the implementations below!
@@ -46,7 +127,7 @@ void Rectangle::draw(Graphics & drawer)
     Point topRight(end.getX(), start.getY());
     Point bottomRight = end;
     Point bottomLeft(start.getX(), end.getY());
-
+    
     // center point and color by averaging
     Point center((start.getX() + end.getX()) / 2,
                  (start.getY() + end.getY()) / 2);
@@ -59,7 +140,7 @@ void Rectangle::draw(Graphics & drawer)
                       (colorTopLeft.getBlue() + colorTopRight.getBlue() +
                        colorBottomRight.getBlue() +
                        colorBottomLeft.getBlue()) / 4);
-
+    
     // four triangles to represent rectangle
     Triangle top(topLeft, colorTopLeft, topRight, colorTopRight,
                  center, colorCenter);
