@@ -121,21 +121,25 @@ void Triangle::read(istream& ins) {
     Color newC1;
     Color newC2;
     Color newC3;
-    ins >> newV1 >> newV2 >> newV3 >> newC;
+    int place = ins.tellg();
+    ins >> newV1 >> newC1; 
     if (ins.fail()) {
         ins.clear();
-        ins >> newV1 >> newC1 >> newV2 >> newC2 >> newV3 >> newC3;
+	ins.seekg(place);
+        ins >> newV1 >> newV2 >> newV3 >> newC;
+        setVertexOne(newV1);
+        setVertexTwo(newV2);
+        setVertexThree(newV3);
+        setColor(newC);
+
+    } else {
+	ins >> newV2 >> newC2 >> newV3 >> newC3;
         setVertexOne(newV1);
         setVertexTwo(newV2);
         setVertexThree(newV3);
         setVertexOneColor(newC1);
         setVertexTwoColor(newC2);
         setVertexThreeColor(newC3);
-    } else {
-        setVertexOne(newV1);
-        setVertexTwo(newV2);
-        setVertexThree(newV3);
-        setColor(newC);
     }
 }
 
