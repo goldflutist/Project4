@@ -35,7 +35,7 @@ Graphics::Graphics(){
 }
 
 void Graphics::clear(){
-    this->initArray();
+    initArray();
     return;
 }
 
