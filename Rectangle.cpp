@@ -83,14 +83,6 @@ Color Rectangle::getColorTopRight() {
     return colorTopRight;
 }
 
-void Rectangle::setColorBottomLeft(Color color) {
-    colorBottomLeft = color;
-}
-
-Color Rectangle::getColorBottomLeft() {
-    return colorBottomLeft;
-}
-
 void Rectangle::setColorBottomRight(Color color) {
     colorBottomRight = color;
 }
@@ -99,10 +91,48 @@ Color Rectangle::getColorBottomRight() {
     return colorBottomRight;
 }
 
+void Rectangle::setColorBottomLeft(Color color) {
+    colorBottomLeft = color;
+}
+
+Color Rectangle::getColorBottomLeft() {
+    return colorBottomLeft;
+}
+
 void Rectangle::read(istream& ins) {
+    Point newStart;
+    Point newEnd;
+    Color newColor;
+    Color cTopLeft;
+    Color cTopRight;
+    Color cBottomRight;
+    Color cBottomLeft;
+    int place = ins.tellg();
+    ins >> newStart >> newEnd >> cTopLeft >> cTopRight;
+    if (ins.fail()) {
+        ins.clear();
+        ins.seekg(place);
+        ins >> newStart >> newEnd >> newColor;
+        setStart(newStart);
+        setEnd(newEnd);
+        setColor(newColor);
+    } else {
+        ins >> cBottomRight >> cBottomLeft;
+        setStart(newStart);
+        setEnd(newEnd);
+        setColorTopLeft(cTopLeft);
+        setColorTopRight(cTopRight);
+        setColorBottomLeft(cBottomLeft);
+        setColorBottomRight(cBottomRight);
+    }
 }
 
 void Rectangle::write(ostream& outs) {
+    outs << getStart() << " " << getEnd() << "  "
+         << getColorTopLeft() << "  "
+         << getColorTopRight() << "  "
+         << getColorBottomRight() << "  "
+         << getColorBottomLeft();
 }
 
 // Your code goes above this line.
