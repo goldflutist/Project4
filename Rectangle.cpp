@@ -107,19 +107,14 @@ void Rectangle::read(istream& ins) {
     Color cTopRight;
     Color cBottomRight;
     Color cBottomLeft;
-    int place = ins.tellg();
     ins >> newStart >> newEnd >> cTopLeft >> cTopRight;
+    setStart(newStart);
+    setEnd(newEnd);
     if (ins.fail()) {
         ins.clear();
-        ins.seekg(place);
-        ins >> newStart >> newEnd >> newColor;
-        setStart(newStart);
-        setEnd(newEnd);
-        setColor(newColor);
+        setColor(cTopLeft);
     } else {
         ins >> cBottomRight >> cBottomLeft;
-        setStart(newStart);
-        setEnd(newEnd);
         setColorTopLeft(cTopLeft);
         setColorTopRight(cTopRight);
         setColorBottomLeft(cBottomLeft);
@@ -129,10 +124,10 @@ void Rectangle::read(istream& ins) {
 
 void Rectangle::write(ostream& outs) {
     outs << getStart() << " " << getEnd() << "  "
-         << getColorTopLeft() << "  "
-         << getColorTopRight() << "  "
-         << getColorBottomRight() << "  "
-         << getColorBottomLeft();
+    << getColorTopLeft() << "  "
+    << getColorTopRight() << "  "
+    << getColorBottomRight() << "  "
+    << getColorBottomLeft();
 }
 
 // Your code goes above this line.

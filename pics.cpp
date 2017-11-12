@@ -144,55 +144,59 @@ void writeFile(const Graphics& drawer)
 void loadFile(Graphics& drawer)
 {
     // TODO: implement
+    drawer.clear();
     ifstream ins;
     string fileName;
     char shapeType;
     string errorLine;
+    Circle newCircle;
+    Line newLine;
+    Rectangle newRectangle;
+    Triangle newTriangle;
     
     fileName = openFile(ins);
-    while (!ins.eof()) {
-        ins >> shapeType;
-        Circle newCircle;
-        Line newLine;
-        Rectangle newRectangle;
-        Triangle newTriangle;
-        
+    while (ins >> shapeType) {
+
         switch (shapeType) {
-            
             
             case 'C':
             //read and draw a circle
-            ins >> newCircle;
+            newCircle.read(ins);
             newCircle.draw(drawer);
             break;
             
             case 'L':
             // read and draw a line
-            ins >> newLine;
+            newLine.read(ins);
             newLine.draw(drawer);
             break;
             
             case 'R':
             // read and draw a rectangle
-            ins >> newRectangle;
+            newRectangle.read(ins);
             newRectangle.draw(drawer);
             break;
             
             case 'T':
             // read and draw a triangle
-            ins >> newTriangle;
+            newTriangle.read(ins);
             newTriangle.draw(drawer);
             break;
             
             default:
             getline(ins, errorLine);
             drawer.clear();
+            ins.clear();
             cout << "Error in input file: " << shapeType << errorLine << endl;
+                break;
         }
         
-        // close ins, print "wrote" statement
-        ins.close();
+       
     }
+    
+    // close ins, print "wrote" statement
+    ins.close();
+    cout << "[Loaded " << fileName <<"]" << endl;
 }
 
 string tolower(string str)

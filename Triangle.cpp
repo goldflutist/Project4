@@ -121,19 +121,18 @@ void Triangle::read(istream& ins) {
     Color newC1;
     Color newC2;
     Color newC3;
-    int place = ins.tellg();
-    ins >> newV1 >> newC1; 
+    ins >> newV1 >> newC1;
+    setVertexOne(newV1);
     if (ins.fail()) {
         ins.clear();
-	ins.seekg(place);
-        ins >> newV1 >> newV2 >> newV3 >> newC;
+        ins >> newV2 >> newV3 >> newC;
         setVertexOne(newV1);
         setVertexTwo(newV2);
         setVertexThree(newV3);
         setColor(newC);
-
+        
     } else {
-	ins >> newV2 >> newC2 >> newV3 >> newC3;
+        ins >> newV2 >> newC2 >> newV3 >> newC3;
         setVertexOne(newV1);
         setVertexTwo(newV2);
         setVertexThree(newV3);
@@ -145,8 +144,8 @@ void Triangle::read(istream& ins) {
 
 void Triangle::write(ostream& outs) {
     outs << getVertexOne() << " " << getVertexOneColor() << " "
-         << getVertexTwo() << " " << getVertexTwoColor() << " "
-         << getVertexThree() << " " << getVertexThreeColor();
+    << getVertexTwo() << " " << getVertexTwoColor() << " "
+    << getVertexThree() << " " << getVertexThreeColor();
 }
 
 // Your code goes above this line.
@@ -165,7 +164,7 @@ ostream& operator << (ostream& outs, Triangle tri)
 }
 
 void Triangle::draw (Graphics& drawer) {
-
+    
     int xa = checkRange(getVertexOne().getX());
     int ya = checkRange(getVertexOne().getY());
     int xb = checkRange(getVertexTwo().getX());
@@ -181,11 +180,11 @@ void Triangle::draw (Graphics& drawer) {
     float red3 = (float)(getVertexThreeColor().getRed()/255.0);
     float green3 = (float)(getVertexThreeColor().getGreen()/255.0);
     float blue3 = (float)(getVertexThreeColor().getBlue()/255.0);
-
+    
     float a01, a02, a03, b01, b02, b03, c01, c02, c03, beta1, beta2, beta3;
     float lowX = 0, lowY = 0, highX = 0, highY = 0, i, j, R, G, B, t1, t2, t3;
     float triangleArea = 0;
-
+    
     a01 = (float)(ya - yb);
     a02 = (float)(ya - yc);
     a03 = (float)(yb - yc);
@@ -195,7 +194,7 @@ void Triangle::draw (Graphics& drawer) {
     c01 = -(a01 * (xa+xb)+ b01 * (ya + yb)) / 2;
     c02 = -(a02 *(xa+xc) + b02 * (ya + yc)) / 2;
     c03 = -(a03 *(xb+xc) + b03 * (yb + yc)) / 2;
-
+    
     if (evalFunc(xc,yc, (int)a01, (int)b01, (int)c01) < 0) {
         a01 = a01 * (-1);
         b01 = b01 * (-1);
@@ -219,9 +218,9 @@ void Triangle::draw (Graphics& drawer) {
     if (xc < lowX) { lowX = (float)xc; }
     if (ya < yb) { lowY = (float)ya; } else { lowY = (float)yb; }
     if (yc < lowY) { lowY = (float)yc; }
-
+    
     triangleArea = triArea(xa, ya, xb, yb, xc, yc);
-
+    
     for (i = lowX; i < (highX+1); i++) {
         for (j = lowY; j < (highY+1); j++) {
             t1 = (float)evalFunc((int)i,(int)j, (int)a01, (int)b01, (int)c01);
@@ -246,11 +245,11 @@ void Triangle::draw (Graphics& drawer) {
 int Triangle::checkRange(int val)
 {
     if (val < 0)
-        return 0;
+    return 0;
     else if (val > DIMENSION)
-        return DIMENSION;
+    return DIMENSION;
     else
-        return val;
+    return val;
 }
 
 int Triangle::evalFunc(int x, int y, int a, int b, int c) {

@@ -20,9 +20,9 @@ Line::Line() {
 }
 
 Line::Line(Point pt1, Point pt2, Color color) {
-   setColor(color);
-   setStart(pt1);
-   setEnd(pt2);
+    setColor(color);
+    setStart(pt1);
+    setEnd(pt2);
 }
 
 void Line::setStart(Point pt) {
@@ -55,9 +55,9 @@ void Line::read(istream& ins) {
     Point newStart;
     Point newEnd;
     Color newColor;
-
+    
     ins >> newStart >> newEnd >> newColor;
-
+    
     setStart(newStart);
     setEnd(newEnd);
     setColor(newColor);
@@ -65,9 +65,9 @@ void Line::read(istream& ins) {
 
 void Line::write(ostream& outs) {
     outs << "(" << start.getX() << ", " << start.getY() << ") "
-         << "(" << end.getX() << ", " << end.getY() << ") "
-         << lineColor.getRed() << " " << lineColor.getGreen()
-         << " " << lineColor.getBlue();
+    << "(" << end.getX() << ", " << end.getY() << ") "
+    << lineColor.getRed() << " " << lineColor.getGreen()
+    << " " << lineColor.getBlue();
     return;
 }
 
@@ -99,19 +99,19 @@ void Line::draw(Graphics &drawer)
     int p1y = getStart().getY();
     int p2x = getEnd().getX();
     int p2y = getEnd().getY();
-
+    
     int red = getColor().getRed();
     int blue = getColor().getBlue();
     int green = getColor().getGreen();
-
+    
     int F, x, y;
-
+    
     if (p1x > p2x)  // Swap points if p1 is on the right of p2
     {
         swap(p1x, p2x);
         swap(p1y, p2y);
     }
-
+    
     // Handle trivial cases separately for algorithm speed up.
     // Trivial case 1: m = +/-INF (Vertical line)
     if (p1x == p2x)
@@ -120,7 +120,7 @@ void Line::draw(Graphics &drawer)
         {
             swap(p1y, p2y);
         }
-
+        
         x = p1x;
         y = p1y;
         while (y <= p2y)
@@ -135,7 +135,7 @@ void Line::draw(Graphics &drawer)
     {
         x = p1x;
         y = p1y;
-
+        
         while (x <= p2x)
         {
             drawer.setPixel(x, y, Color(red, green, blue));
@@ -143,23 +143,23 @@ void Line::draw(Graphics &drawer)
         }
         return;
     }
-
-
+    
+    
     int dy            = p2y - p1y;  // y-increment from p1 to p2
     int dx            = p2x - p1x;  // x-increment from p1 to p2
     int dy2           = (dy << 1);  // dy << 1 == 2*dy  i.e., bit shifting
     int dx2           = (dx << 1);
     int dy2_minus_dx2 = dy2 - dx2;  // precompute constant for speed up
     int dy2_plus_dx2  = dy2 + dx2;
-
-
+    
+    
     if (dy >= 0)    // m >= 0
     {
         // Case 1: 0 <= m <= 1 (Original case)
         if (dy <= dx)
         {
             F = dy2 - dx;    // initial F
-
+            
             x = p1x;
             y = p1y;
             while (x <= p2x)
@@ -182,7 +182,7 @@ void Line::draw(Graphics &drawer)
         else
         {
             F = dx2 - dy;    // initial F
-
+            
             y = p1y;
             x = p1x;
             while (y <= p2y)
@@ -207,13 +207,13 @@ void Line::draw(Graphics &drawer)
         if (dx >= -dy)
         {
             F = -dy2 - dx;    // initial F
-
+            
             x = p1x;
             y = p1y;
             while (x <= p2x)
             {
                 drawer.setPixel(x, y, Color(red, green, blue));
-
+                
                 if (F <= 0)
                 {
                     F -= dy2;
@@ -231,13 +231,13 @@ void Line::draw(Graphics &drawer)
         else
         {
             F = dx2 + dy;    // initial F
-
+            
             y = p1y;
             x = p1x;
             while (y >= p2y)
             {
                 drawer.setPixel(x, y, Color(red, green, blue));
-
+                
                 if (F <= 0)
                 {
                     F += dx2;

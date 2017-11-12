@@ -92,12 +92,12 @@ int Color::checkRange(int val) {
 
 istream& operator >> (istream& ins, Color& color)
 {
-   color.read(ins);
-   return ins;
+    color.read(ins);
+    return ins;
 }
 
 ostream& operator << (ostream& outs, Color color)
 {
-   color.write(outs);
-   return outs;
+    color.write(outs);
+    return outs;
 }
