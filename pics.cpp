@@ -88,7 +88,7 @@ void loadFile(Graphics& drawer);
  */
 void writeFile(const Graphics& drawer);
 
-/*
+
 int main()
 {
     Graphics drawer;
@@ -127,23 +127,82 @@ int main()
 
     printCloser();
 }
-*/
+
 
 void writeFile(const Graphics& drawer)
 {
     // TODO: implement
     // This will make use of Graphics::writeFile()
+    string fileName;
+
+    cin >> fileName;
+    fileName += ".bmp";
+    drawer.writeFile(fileName);
+    cout << "[Wrote " + fileName + "]";
 }
 
 void loadFile(Graphics& drawer)
 {
     // TODO: implement
+    ifstream ins;
+    string fileName;
+    char shapeType;
+    string errorLine;
+    
+    fileName = openFile(ins);
+    while (!ins.eof()) {
+        ins >> shapeType;
+        Circle newCircle;
+        Line newLine;
+        Rectangle newRectangle;
+        Triangle newTriangle;
+        
+        switch (shapeType) {
+            
+            
+            case 'C':
+            //read and draw a circle
+            ins >> newCircle;
+            newCircle.draw(drawer);
+            break;
+            
+            case 'L':
+            // read and draw a line
+            ins >> newLine;
+            newLine.draw(drawer);
+            break;
+            
+            case 'R':
+            // read and draw a rectangle
+            ins >> newRectangle;
+            newRectangle.draw(drawer);
+            break;
+            
+            case 'T':
+            // read and draw a triangle
+            ins >> newTriangle;
+            newTriangle.draw(drawer);
+            break;
+            
+            default:
+            getline(ins, errorLine);
+            drawer.clear();
+            cout << "Error in input file: " << shapeType << errorLine << endl;
+        }
+        
+        // close ins, print "wrote" statement
+        ins.close();
+    }
 }
 
 string tolower(string str)
 {
     // TODO: implement
-
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] <= 'Z' && str[i] >= 'A') {
+            str[i] -= ('Z' - 'z');
+        }
+    }
     return str;
 }
 
