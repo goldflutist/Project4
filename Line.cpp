@@ -4,10 +4,10 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <Noah Weingarden, Grace Xu>
+ * <nwein, xugrace>
  *
- * <#Description#>
+ * <Class file for lines>
  */
 
 #include "Line.h"

@@ -4,10 +4,10 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <Noah Weingarden>
+ * <nwein, xugrace>
  *
- * <#Description#>
+ * <Class file for rectangles>
  */
 
 #include "Rectangle.h"
@@ -102,11 +102,11 @@ Color Rectangle::getColorBottomLeft() {
 void Rectangle::read(istream& ins) {
     Point newStart;
     Point newEnd;
-    Color newColor;
     Color cTopLeft;
     Color cTopRight;
     Color cBottomRight;
     Color cBottomLeft;
+    // Include all components shared by both input patterns, plus one
     ins >> newStart >> newEnd >> cTopLeft >> cTopRight;
     setStart(newStart);
     setEnd(newEnd);

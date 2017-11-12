@@ -28,7 +28,7 @@ void test_triangle();
 void test_circle();
 void test_rectangle();
 
-int main() {
+/*int main() {
     test_point();
     test_color();
     test_graphics();
@@ -37,7 +37,7 @@ int main() {
     test_circle();
     test_rectangle();
     return 0;
-}
+}*/
 
 void test_point() {
     cout << "point" << endl;

@@ -7,7 +7,7 @@
  * Grace Xu, Noah Weingarden
  * xugrace, nwein
  *
- * <#Description#>
+ * <Class file for circles>
  */
 
 #include "Circle.h"

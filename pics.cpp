@@ -4,15 +4,16 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <Noah Weingarden, Grace Xu>
+ * <nwein, xugrace>
  *
- * <#Description#>
+ * <Main command section, load txt file and write it into bmp>
  */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cctype>
 using namespace std;
 
 #include "Line.h"
@@ -131,19 +132,15 @@ int main()
 
 void writeFile(const Graphics& drawer)
 {
-    // TODO: implement
-    // This will make use of Graphics::writeFile()
     string fileName;
-
     cin >> fileName;
     fileName += ".bmp";
     drawer.writeFile(fileName);
-    cout << "[Wrote " + fileName + "]";
+    cout << "[Wrote " + fileName + "]" << endl << endl;
 }
 
 void loadFile(Graphics& drawer)
 {
-    // TODO: implement
     drawer.clear();
     ifstream ins;
     string fileName;
@@ -156,9 +153,7 @@ void loadFile(Graphics& drawer)
     
     fileName = openFile(ins);
     while (ins >> shapeType) {
-
         switch (shapeType) {
-            
             case 'C':
             //read and draw a circle
             newCircle.read(ins);
@@ -188,7 +183,7 @@ void loadFile(Graphics& drawer)
             drawer.clear();
             ins.clear();
             cout << "Error in input file: " << shapeType << errorLine << endl;
-                break;
+            break;
         }
         
        
@@ -196,16 +191,13 @@ void loadFile(Graphics& drawer)
     
     // close ins, print "wrote" statement
     ins.close();
-    cout << "[Loaded " << fileName <<"]" << endl;
+    cout << "[Loaded " << fileName <<"]" << endl << endl;
 }
 
 string tolower(string str)
 {
-    // TODO: implement
     for (int i = 0; i < str.length(); i++) {
-        if (str[i] <= 'Z' && str[i] >= 'A') {
-            str[i] -= ('Z' - 'z');
-        }
+        str[i] = tolower(str[i]);
     }
     return str;
 }
