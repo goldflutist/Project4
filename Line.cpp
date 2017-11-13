@@ -64,10 +64,7 @@ void Line::read(istream& ins) {
 }
 
 void Line::write(ostream& outs) {
-    outs << "(" << start.getX() << ", " << start.getY() << ") "
-    << "(" << end.getX() << ", " << end.getY() << ") "
-    << lineColor.getRed() << " " << lineColor.getGreen()
-    << " " << lineColor.getBlue();
+    outs << start << " " << end << " " << lineColor << endl;
     return;
 }
 
