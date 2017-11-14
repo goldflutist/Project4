@@ -4,10 +4,10 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <Noah Weingarden, Grace Xu>
+ * <nwein, xugrace>
  *
- * <#Description#>
+ * <Class file for colors>
  */
 
 #include "Color.h"
@@ -92,12 +92,12 @@ int Color::checkRange(int val) {
 
 istream& operator >> (istream& ins, Color& color)
 {
-   color.read(ins);
-   return ins;
+    color.read(ins);
+    return ins;
 }
 
 ostream& operator << (ostream& outs, Color color)
 {
-   color.write(outs);
-   return outs;
+    color.write(outs);
+    return outs;
 }

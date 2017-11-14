@@ -4,10 +4,10 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * Grace Xu
- * xugrace
+ * Grace Xu, Noah Weingarden
+ * xugrace, nwein
  *
- * <#Description#>
+ * <Class file for circles>
  */
 
 #include "Circle.h"
@@ -27,7 +27,7 @@ Circle::Circle(Point pt, int r, Color c) {
     center = pt;
     radius = checkRadius(r);
     color = c;
-
+    
 }
 
 void Circle::setCenter(Point pt) {
@@ -58,9 +58,9 @@ void Circle::read(istream& ins) {
     Point newCenter;
     int newRadius;
     Color newColor;
-
+    
     ins >> newCenter >> newRadius >> newColor;
-
+    
     setCenter(newCenter);
     setRadius(newRadius);
     setColor(newColor);
@@ -92,15 +92,15 @@ void Circle::draw(Graphics & drawer)
     int x = radius;
     int y = 0;
     Color c = getColor();
-
+    
     while (x >= y)
     {
         plot8points(x, y, c, drawer);
-
+        
         error += y;
         ++y;
         error += y;
-
+        
         if (error >= 0)
         {
             error -= x;
@@ -130,12 +130,12 @@ void Circle::plot4points(int x, int y, Color c, Graphics& drawer)
     // cx and cy denote the offset of the circle center from the origin.
     int cx = getCenter().getX();
     int cy = getCenter().getY();
-
+    
     Point pt1Start(cx - x, cy + y);
     Point pt1End(cx + x, cy + y);
     Line line1(pt1Start, pt1End, c);
     line1.draw(drawer);
-
+    
     Point pt2Start(cx - x, cy - y);
     Point pt2End(cx + x, cy - y);
     Line line2(pt2Start, pt2End, c);

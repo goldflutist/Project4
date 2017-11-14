@@ -4,10 +4,10 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <Noah Weingarden>
+ * <nwein, xugrace>
  *
- * <#Description#>
+ * <Class file for rectangles>
  */
 
 #include "Rectangle.h"
@@ -102,24 +102,19 @@ Color Rectangle::getColorBottomLeft() {
 void Rectangle::read(istream& ins) {
     Point newStart;
     Point newEnd;
-    Color newColor;
     Color cTopLeft;
     Color cTopRight;
     Color cBottomRight;
     Color cBottomLeft;
-    int place = ins.tellg();
+    // Include all components shared by both input patterns, plus one
     ins >> newStart >> newEnd >> cTopLeft >> cTopRight;
+    setStart(newStart);
+    setEnd(newEnd);
     if (ins.fail()) {
         ins.clear();
-        ins.seekg(place);
-        ins >> newStart >> newEnd >> newColor;
-        setStart(newStart);
-        setEnd(newEnd);
-        setColor(newColor);
+        setColor(cTopLeft);
     } else {
         ins >> cBottomRight >> cBottomLeft;
-        setStart(newStart);
-        setEnd(newEnd);
         setColorTopLeft(cTopLeft);
         setColorTopRight(cTopRight);
         setColorBottomLeft(cBottomLeft);
@@ -129,10 +124,10 @@ void Rectangle::read(istream& ins) {
 
 void Rectangle::write(ostream& outs) {
     outs << getStart() << " " << getEnd() << "  "
-         << getColorTopLeft() << "  "
-         << getColorTopRight() << "  "
-         << getColorBottomRight() << "  "
-         << getColorBottomLeft();
+    << getColorTopLeft() << "  "
+    << getColorTopRight() << "  "
+    << getColorBottomRight() << "  "
+    << getColorBottomLeft();
 }
 
 // Your code goes above this line.

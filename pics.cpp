@@ -4,15 +4,16 @@
  * EECS 183, Fall 2017
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * <Noah Weingarden, Grace Xu>
+ * <nwein, xugrace>
  *
- * <#Description#>
+ * <Main command section, load txt file and write it into bmp>
  */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cctype>
 using namespace std;
 
 #include "Line.h"
@@ -88,7 +89,7 @@ void loadFile(Graphics& drawer);
  */
 void writeFile(const Graphics& drawer);
 
-/*
+
 int main()
 {
     Graphics drawer;
@@ -127,23 +128,77 @@ int main()
 
     printCloser();
 }
-*/
+
 
 void writeFile(const Graphics& drawer)
 {
-    // TODO: implement
-    // This will make use of Graphics::writeFile()
+    string fileName;
+    cin >> fileName;
+    fileName += ".bmp";
+    drawer.writeFile(fileName);
+    cout << "[Wrote " + fileName + "]" << endl << endl;
 }
 
 void loadFile(Graphics& drawer)
 {
-    // TODO: implement
+    drawer.clear();
+    ifstream ins;
+    string fileName;
+    char shapeType;
+    string errorLine;
+    Circle newCircle;
+    Line newLine;
+    Rectangle newRectangle;
+    Triangle newTriangle;
+    
+    fileName = openFile(ins);
+    while (ins >> shapeType) {
+        switch (shapeType) {
+            case 'C':
+            //read and draw a circle
+            newCircle.read(ins);
+            newCircle.draw(drawer);
+            break;
+            
+            case 'L':
+            // read and draw a line
+            newLine.read(ins);
+            newLine.draw(drawer);
+            break;
+            
+            case 'R':
+            // read and draw a rectangle
+            newRectangle.read(ins);
+            newRectangle.draw(drawer);
+            break;
+            
+            case 'T':
+            // read and draw a triangle
+            newTriangle.read(ins);
+            newTriangle.draw(drawer);
+            break;
+            
+            default:
+            getline(ins, errorLine);
+            drawer.clear();
+            ins.clear();
+            cout << "Error in input file: " << shapeType << errorLine << endl;
+            break;
+        }
+        
+       
+    }
+    
+    // close ins, print "wrote" statement
+    ins.close();
+    cout << "[Loaded " << fileName <<"]" << endl << endl;
 }
 
 string tolower(string str)
 {
-    // TODO: implement
-
+    for (int i = 0; i < str.length(); i++) {
+        str[i] = tolower(str[i]);
+    }
     return str;
 }
 
